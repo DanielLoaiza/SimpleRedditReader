@@ -1,59 +1,56 @@
 package com.dafelo.co.redditreader.subreddits.domain;
 
 
+import com.dafelo.co.redditreader.main.domain.RedditObject;
+
+
+import org.parceler.Parcel;
+
 import java.util.List;
 
 /**
  * Created by root on 7/01/17.
  */
+@Parcel
+public class SubReddit implements RedditObject {
 
-public class SubReddit {
-
-    private String bannerImg;
-    private Boolean userSrThemeEnabled;
-    private String submitTextHtml;
-    private Object userIsBanned;
-    private Boolean wikiEnabled;
-    private Boolean showMedia;
-    private String id;
-    private String submitText;
-    private String displayName;
-    private String headerImg;
-    private String descriptionHtml;
-    private String title;
-    private Boolean collapseDeletedComments;
-    private Boolean over18;
-    private String publicDescriptionHtml;
-    private Boolean spoilersEnabled;
-    private List<Integer> iconSize = null;
-    private Object suggestedCommentSort;
-    private String iconImg;
-    private String headerTitle;
-    private String description;
-    private Object userIsMuted;
-    private Object submitLinkLabel;
-    private Object accountsActive;
-    private Boolean publicTraffic;
-    private List<Integer> headerSize = null;
-    private Integer subscribers;
-    private String submitTextLabel;
-    private String lang;
-    private Object userIsModerator;
-    private String keyColor;
-    private String name;
-    private Integer created;
-    private String url;
-    private Boolean quarantine;
-    private Boolean hideAds;
-    private Integer createdUtc;
-    private List<Integer> bannerSize = null;
-    private Object userIsContributor;
-    private String publicDescription;
-    private Boolean showMediaPreview;
-    private Integer commentScoreHideMins;
-    private String subredditType;
-    private String submissionType;
-    private Object userIsSubscriber;
+     String bannerImg;
+     Boolean userSrThemeEnabled;
+     String submitTextHtml;
+     Boolean wikiEnabled;
+     Boolean showMedia;
+     String id;
+     String submitText;
+     String displayName;
+     String headerImg;
+     String descriptionHtml;
+     String title;
+     Boolean collapseDeletedComments;
+     Boolean over18;
+     String publicDescriptionHtml;
+     Boolean spoilersEnabled;
+     List<Integer> iconSize = null;
+     String iconImg;
+     String headerTitle;
+     String description;
+     Boolean publicTraffic;
+     List<Integer> headerSize = null;
+     Integer subscribers;
+     String submitTextLabel;
+     String lang;
+     String keyColor;
+     String name;
+     Integer created;
+     String url;
+     Boolean quarantine;
+     Boolean hideAds;
+     Integer createdUtc;
+     List<Integer> bannerSize = null;
+     String publicDescription;
+     Boolean showMediaPreview;
+     Integer commentScoreHideMins;
+     String subredditType;
+     String submissionType;
 
     public String getBannerImg() {
         return bannerImg;
@@ -79,13 +76,7 @@ public class SubReddit {
         this.submitTextHtml = submitTextHtml;
     }
 
-    public Object getUserIsBanned() {
-        return userIsBanned;
-    }
 
-    public void setUserIsBanned(Object userIsBanned) {
-        this.userIsBanned = userIsBanned;
-    }
 
     public Boolean getWikiEnabled() {
         return wikiEnabled;
@@ -191,13 +182,6 @@ public class SubReddit {
         this.iconSize = iconSize;
     }
 
-    public Object getSuggestedCommentSort() {
-        return suggestedCommentSort;
-    }
-
-    public void setSuggestedCommentSort(Object suggestedCommentSort) {
-        this.suggestedCommentSort = suggestedCommentSort;
-    }
 
     public String getIconImg() {
         return iconImg;
@@ -223,29 +207,6 @@ public class SubReddit {
         this.description = description;
     }
 
-    public Object getUserIsMuted() {
-        return userIsMuted;
-    }
-
-    public void setUserIsMuted(Object userIsMuted) {
-        this.userIsMuted = userIsMuted;
-    }
-
-    public Object getSubmitLinkLabel() {
-        return submitLinkLabel;
-    }
-
-    public void setSubmitLinkLabel(Object submitLinkLabel) {
-        this.submitLinkLabel = submitLinkLabel;
-    }
-
-    public Object getAccountsActive() {
-        return accountsActive;
-    }
-
-    public void setAccountsActive(Object accountsActive) {
-        this.accountsActive = accountsActive;
-    }
 
     public Boolean getPublicTraffic() {
         return publicTraffic;
@@ -285,14 +246,6 @@ public class SubReddit {
 
     public void setLang(String lang) {
         this.lang = lang;
-    }
-
-    public Object getUserIsModerator() {
-        return userIsModerator;
-    }
-
-    public void setUserIsModerator(Object userIsModerator) {
-        this.userIsModerator = userIsModerator;
     }
 
     public String getKeyColor() {
@@ -359,13 +312,6 @@ public class SubReddit {
         this.bannerSize = bannerSize;
     }
 
-    public Object getUserIsContributor() {
-        return userIsContributor;
-    }
-
-    public void setUserIsContributor(Object userIsContributor) {
-        this.userIsContributor = userIsContributor;
-    }
 
     public String getPublicDescription() {
         return publicDescription;
@@ -405,14 +351,6 @@ public class SubReddit {
 
     public void setSubmissionType(String submissionType) {
         this.submissionType = submissionType;
-    }
-
-    public Object getUserIsSubscriber() {
-        return userIsSubscriber;
-    }
-
-    public void setUserIsSubscriber(Object userIsSubscriber) {
-        this.userIsSubscriber = userIsSubscriber;
     }
 
 }

@@ -8,19 +8,17 @@ import com.dafelo.co.redditreader.subreddits.di.DaggerRedditComponent;
 import com.dafelo.co.redditreader.subreddits.di.RedditComponent;
 import com.dafelo.co.redditreader.subreddits.di.RedditModule;
 
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements HasComponent<RedditComponent> {
 
-    private SubRedditListFragment subRedditListFragment;
     private RedditComponent redditComponent;
+    private SubRedditListFragment subRedditListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.initializeInjector();
-        ButterKnife.bind(this);
         if(savedInstanceState == null) {
             subRedditListFragment = new SubRedditListFragment();
             addFragment(R.id.reddit_list_container, subRedditListFragment);
