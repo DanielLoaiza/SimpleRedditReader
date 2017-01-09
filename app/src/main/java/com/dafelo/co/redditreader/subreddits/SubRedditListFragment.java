@@ -17,6 +17,7 @@ import com.dafelo.co.redditreader.subreddits.adapters.SubRedditListAdapter;
 import com.dafelo.co.redditreader.subreddits.di.RedditComponent;
 import com.dafelo.co.redditreader.subreddits.domain.SubReddit;
 import com.dafelo.co.redditreader.subreddits.interfaces.SubRedditListContract;
+import com.dafelo.co.redditreader.subreddits.presenter.SubRedditListPresenter;
 
 
 import org.parceler.Parcels;
@@ -66,8 +67,9 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
         super.onViewCreated(view, savedInstanceState);
         mPresenter.setView(this);
         if(savedInstanceState != null) {
-            List<SubReddit> subReddits = Parcels.unwrap(savedInstanceState.getParcelable("key1"));
-            String afterToken = savedInstanceState.getString("key");
+            List<SubReddit> subReddits = Parcels.unwrap(savedInstanceState
+                    .getParcelable(SubRedditListPresenter.REDDIT_ITEMS));
+            String afterToken = savedInstanceState.getString(SubRedditListPresenter.AFTER_TOKEN);
             mPresenter.setAfterToken(afterToken);
             mPresenter.setSubRedditList(subReddits);
 
@@ -89,8 +91,10 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            mAdapter.setOrientation(true);
         } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mAdapter.setOrientation(false);
         }
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -124,8 +128,8 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
     @Override
     public void onSaveInstanceState(Bundle outState) {
         Parcelable wrapped = Parcels.wrap(mPresenter.getSubRedditsList());
-        outState.putString("key", mPresenter.getAfterToken());
-        outState.putParcelable("key1", wrapped);
+        outState.putString(SubRedditListPresenter.AFTER_TOKEN, mPresenter.getAfterToken());
+        outState.putParcelable(SubRedditListPresenter.REDDIT_ITEMS, wrapped);
         super.onSaveInstanceState(outState);
     }
 }

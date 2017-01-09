@@ -30,6 +30,8 @@ public class SubRedditListPresenter implements SubRedditListContract.Presenter {
     private String afterToken;
     private List<SubReddit> subRedditList;
     private final UseCase getSubRedditsListUseCase;
+    public final static String REDDIT_ITEMS = "com.dafelo.co.redditreader.subreddit_list";
+    public final static String AFTER_TOKEN = "com.dafelo.co.redditreader.subreddit_after_token";
 
     @Inject
     public SubRedditListPresenter(@Named("subRedditsList") UseCase getSubRedditsListUseCase) {
