@@ -3,7 +3,8 @@ package com.dafelo.co.redditreader.main.domain;
 import java.util.List;
 
 /**
- * Created by root on 7/01/17.
+ * Created by dafelo on 7/01/17.
+ * POJO that maps the Listing kind obtained by the reddit response
  */
 
 public class RedditListing implements RedditObject {

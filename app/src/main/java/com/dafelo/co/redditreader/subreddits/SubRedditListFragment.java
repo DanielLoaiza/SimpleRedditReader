@@ -48,6 +48,7 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // get the component from the activity with the injected dependencies
         this.getComponent(RedditComponent.class).inject(this);
 
 
@@ -57,6 +58,7 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_container, container, false);
+        // init data
         mAdapter = new SubRedditListAdapter(getActivity());
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
         setupRecyclerView();
@@ -66,6 +68,7 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPresenter.setView(this);
+        // if there is any savedState is restored
         if(savedInstanceState != null) {
             List<SubReddit> subReddits = Parcels.unwrap(savedInstanceState
                     .getParcelable(SubRedditListPresenter.REDDIT_ITEMS));
@@ -74,6 +77,7 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
             mPresenter.setSubRedditList(subReddits);
 
         }
+        // if no savedState get the subreddits from presenter
         if (savedInstanceState == null) {
             mPresenter.getSubReddits();
         }
@@ -87,12 +91,15 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
         mRecyclerView.setAdapter(null);
     }
 
+    /**
+     * method that set the layout manager for the recycler view depending on his orientation
+     */
     public void setupRecyclerView() {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             mAdapter.setOrientation(true);
-        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mAdapter.setOrientation(false);
         }
@@ -127,6 +134,7 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        // wraps the data on the bundle to restore the state later
         Parcelable wrapped = Parcels.wrap(mPresenter.getSubRedditsList());
         outState.putString(SubRedditListPresenter.AFTER_TOKEN, mPresenter.getAfterToken());
         outState.putParcelable(SubRedditListPresenter.REDDIT_ITEMS, wrapped);

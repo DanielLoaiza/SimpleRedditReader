@@ -5,7 +5,9 @@ package com.dafelo.co.redditreader.main.domain.schedulers;
  */
 
 import rx.Scheduler;
-
+/**
+ * interface that provides a scheduler to subscribeOn
+ */
 public interface SubscribeOn {
     Scheduler getScheduler();
 }

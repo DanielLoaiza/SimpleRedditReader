@@ -7,7 +7,7 @@ import com.dafelo.co.redditreader.di.components.ApplicationComponent;
 import com.dafelo.co.redditreader.di.components.DaggerApplicationComponent;
 import com.dafelo.co.redditreader.di.modules.ApplicationModule;
 
-
+// application class that contains the main component for DI
 public class RedditReader extends Application {
     private ApplicationComponent applicationComponent;
 

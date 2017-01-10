@@ -20,15 +20,19 @@ import rx.Observable;
 
 /**
  * Created by root on 24/11/16.
+ * presenter that handles all the subreddits data
  */
 
 public class SubRedditListPresenter implements SubRedditListContract.Presenter {
 
     @NonNull
     private SubRedditListContract.View mSubRedditView;
+    // the total page limit
     private int pageLimit;
+    // the after token for pagination
     private String afterToken;
     private List<SubReddit> subRedditList;
+    // the use case with the subreddits methods
     private final UseCase getSubRedditsListUseCase;
     public final static String REDDIT_ITEMS = "com.dafelo.co.redditreader.subreddit_list";
     public final static String AFTER_TOKEN = "com.dafelo.co.redditreader.subreddit_after_token";
@@ -42,7 +46,9 @@ public class SubRedditListPresenter implements SubRedditListContract.Presenter {
 
     @Override
     public void getSubReddits() {
+        // set the query data
         UseCaseData queryData = new RedditsQueryData(afterToken, pageLimit);
+        // execute the use case
         this.getSubRedditsListUseCase.setData(queryData);
         this.getSubRedditsListUseCase.execute(new SubRedditListSubscriber());
     }

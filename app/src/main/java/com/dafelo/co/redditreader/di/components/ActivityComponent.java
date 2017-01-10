@@ -1,7 +1,8 @@
 package com.dafelo.co.redditreader.di.components;
 
 /**
- * Created by root on 24/10/16.
+ * Created by dafelo on 24/10/16.
+ * Activity component that expose the activity to the subgraphs
  */
 
 import android.app.Activity;

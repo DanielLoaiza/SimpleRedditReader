@@ -13,7 +13,9 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 /**
- * Created by root on 7/01/17.
+ * Created by dafelo on 7/01/17.
+ * @author  Daniel Loaiza
+ * Class that handles the deserialization of the RedditObject
  */
 
 public class RedditObjectJsonDeserializer implements JsonDeserializer {
@@ -28,9 +30,11 @@ public class RedditObjectJsonDeserializer implements JsonDeserializer {
 
         try
         {
+            // get the kind from the jsonObject , the kind tells the type of the reddit data
             JsonObject jsonObject = json.getAsJsonObject();
             String kind = jsonObject.get("kind").getAsString();
 
+            // sends the kind and the data to the correct class
             return context.deserialize(jsonObject.get("data"), getClassForKind(kind));
         }
         catch (JsonParseException e)
@@ -40,8 +44,15 @@ public class RedditObjectJsonDeserializer implements JsonDeserializer {
         }
     }
 
+    /**
+     *
+     * @param kind , the kind of reddit returned by the service
+     * @return the right class to deserializate
+     */
     private Class getClassForKind(String kind)
     {
+        // reddit can return multiple type of kinds, now we just want to deserialize
+        // listing that is the root and t5 that corresponds to subreddits
         switch (kind)
         {
             case "Listing":

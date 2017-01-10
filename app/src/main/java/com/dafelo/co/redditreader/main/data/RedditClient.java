@@ -10,6 +10,9 @@ import rx.Observable;
  * Created by root on 7/01/17.
  */
 
+/**
+ * interface with the api endpoints
+ */
 public interface RedditClient
 {
     @GET("reddits.json")

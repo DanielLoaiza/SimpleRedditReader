@@ -1,8 +1,13 @@
 package com.dafelo.co.redditreader.subreddits.data.datasource;
 
 
+import android.content.Context;
+
 import com.dafelo.co.redditreader.main.data.ApiConnection;
 import com.dafelo.co.redditreader.main.data.RedditClient;
+import com.dafelo.co.redditreader.main.domain.schedulers.ObserveOn;
+import com.dafelo.co.redditreader.subreddits.data.datasource.local.LocalRedditDataStore;
+import com.dafelo.co.redditreader.subreddits.data.datasource.remote.CloudRedditDataStore;
 
 import javax.inject.Inject;
 
@@ -14,8 +19,15 @@ import retrofit2.Retrofit;
 
 public class RedditDataStoreFactory {
 
+    Context context;
+    ObserveOn observeOn;
+    LocalRedditDataStore localRedditDataStore;
     @Inject
-    public RedditDataStoreFactory() {
+    public RedditDataStoreFactory(Context context, ObserveOn observeOn, LocalRedditDataStore localRedditDataStore) {
+        this.context = context;
+        this.observeOn = observeOn;
+        this.localRedditDataStore = localRedditDataStore;
+
     }
     /**
      * Create {@link RedditDataStore} to retrieve data from the Cloud.
@@ -26,5 +38,13 @@ public class RedditDataStoreFactory {
         RedditClient redditService = retrofit.create(RedditClient.class);
 
         return new CloudRedditDataStore(redditService);
+    }
+
+    /**
+     * Create {@link RedditDataStore} to retrieve data from the sql lite database.
+     */
+    public RedditDataStore createLocalDataStore() {
+
+        return localRedditDataStore;
     }
 }

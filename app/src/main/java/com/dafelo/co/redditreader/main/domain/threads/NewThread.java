@@ -15,8 +15,8 @@ import rx.schedulers.Schedulers;
  */
 
 /**
- * MainThread (UI Thread) implementation based on a {@link Scheduler}
- * which will execute actions on the Android UI thread
+ * NewThread implementation based on a {@link Scheduler}
+ * which will execute actions on a new thread
  */
 @Singleton
 public class NewThread implements SubscribeOn {

@@ -6,6 +6,9 @@ package com.dafelo.co.redditreader.main.domain.schedulers;
 
 import rx.Scheduler;
 
+/**
+ * interface that provides a scheduler to observeOn
+ */
 public interface ObserveOn {
     Scheduler getScheduler();
 }

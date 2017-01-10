@@ -27,7 +27,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * Esto se aplicaria si las vistas fueran orientadas a fragmentos
      * Adds a {@link Fragment} to this activity's layout.
      *
      * @param containerViewId The container view to where add the fragment.
@@ -35,7 +34,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
 
     protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager()
+                .beginTransaction();
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
     }

@@ -10,13 +10,20 @@ import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
 /**
- * Created by root on 23/10/16.
+ * Created by dafelo on 23/10/16.
  */
 
+/**
+ * Generic use Case class with all the methods required to execute the use Case
+ * all use cases must extend this class
+ */
 public abstract class UseCase {
 
+    // the thread where the use case is subscribed on
     private final SubscribeOn subscribeOn;
+    // the thread where the use case is observing on
     private final ObserveOn observeOn;
+    // generic interface used to pass dynamic data to use cases
     protected   UseCaseData useCaseData;
 
     private Subscription subscription = Subscriptions.empty();
@@ -34,10 +41,9 @@ public abstract class UseCase {
     /**
      * Executes the current use case.
      *
-     * @param useCaseSubscriber The guy who will be listen to the observable build
+     * @param useCaseSubscriber The listener to the observable build
      *                          with {@link #buildUseCaseObservable()}.
      */
-    @SuppressWarnings("unchecked")
     public void execute(Subscriber useCaseSubscriber) {
         this.subscription = this.buildUseCaseObservable()
                 .subscribeOn(subscribeOn.getScheduler())

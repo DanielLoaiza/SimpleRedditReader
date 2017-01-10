@@ -16,15 +16,21 @@ import java.util.List;
 
 /**
  * Created by root on 8/01/17.
+ * Adapter that shows the corresponding layout depending on device orientation
  */
 
 public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    // the list of subreddits
     private List<SubReddit> mSubReddits;
+    // the context
     private Context mContext;
+    // the device orientation (true for landscape, false for portrait)
     private boolean orientation;
-    public final int LANDSCAPE = 1;
-    private final int PORTRAIT = 0;
+    // constants used to identify the device orientation and tell the adapter
+    // what layout to show
+    private final static int LANDSCAPE = 1;
+    private final static int PORTRAIT = 0;
 
     public SubRedditListAdapter(Context context) {
         mContext = context;
@@ -35,6 +41,7 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.notifyDataSetChanged();
     }
 
+    // every time the device rotation changes calls this method
     public void setOrientation(boolean orientation) {
         this.orientation = orientation;
     }
@@ -46,13 +53,12 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subreddit_list_item, parent, false);
         RecyclerView.ViewHolder vh;
+        // creates different viewholders depending on the device orientation
         if(viewType == LANDSCAPE) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subreddit_list_item_land, parent, false);
             vh =  new LandscapeViewHolder(view);
         } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subreddit_list_item, parent, false);
             vh =  new PortraitViewHolder(view);
         }
         return vh;
@@ -61,25 +67,30 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SubReddit subReddit = mSubReddits.get(position);
-        String url = subReddit.getBannerImg().isEmpty() ? subReddit.getHeaderImg() : subReddit.getBannerImg();
-        if(holder instanceof LandscapeViewHolder) {
-            ((LandscapeViewHolder)holder).title.setText(subReddit.getTitle());
-            Glide
-                    .with(mContext)
-                    .load(url)
-                    .centerCrop()
-                    .crossFade()
-                    .into(((LandscapeViewHolder)holder).image);
-        } else {
-            ((PortraitViewHolder)holder).title.setText(subReddit.getTitle());
-            ((PortraitViewHolder)holder).text.setText(subReddit.getPublicDescription());
-            ((PortraitViewHolder)holder).subscribers.setText(String.valueOf(subReddit.getSubscribers()));
-            Glide
-                    .with(mContext)
-                    .load(url)
-                    .centerCrop()
-                    .crossFade()
-                    .into(((PortraitViewHolder)holder).image);
+        // validates what kind of viewholders comes to set the data properly
+        try {
+            String url = subReddit.getBannerImg().isEmpty() ? subReddit.getHeaderImg() : subReddit.getBannerImg();
+            if(holder instanceof LandscapeViewHolder) {
+                ((LandscapeViewHolder)holder).title.setText(subReddit.getTitle());
+                Glide
+                        .with(mContext)
+                        .load(url)
+                        .centerCrop()
+                        .crossFade()
+                        .into(((LandscapeViewHolder)holder).image);
+            } else {
+                ((PortraitViewHolder)holder).title.setText(subReddit.getTitle());
+                ((PortraitViewHolder)holder).text.setText(subReddit.getPublicDescription());
+                ((PortraitViewHolder)holder).subscribers.setText(String.valueOf(subReddit.getSubscribers()));
+                Glide
+                        .with(mContext)
+                        .load(url)
+                        .centerCrop()
+                        .crossFade()
+                        .into(((PortraitViewHolder)holder).image);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

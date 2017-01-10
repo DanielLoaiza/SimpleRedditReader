@@ -8,19 +8,23 @@ import com.dafelo.co.redditreader.subreddits.di.DaggerRedditComponent;
 import com.dafelo.co.redditreader.subreddits.di.RedditComponent;
 import com.dafelo.co.redditreader.subreddits.di.RedditModule;
 
-
+/**
+ * Application main activity
+ */
 public class MainActivity extends BaseActivity implements HasComponent<RedditComponent> {
 
     private RedditComponent redditComponent;
-    private SubRedditListFragment subRedditListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // initializes the dagger component for DI
         this.initializeInjector();
+        // validates if there is no savedInstance state
+        // this way avoids to recreate the fragment on rotation changes
         if(savedInstanceState == null) {
-            subRedditListFragment = new SubRedditListFragment();
+            SubRedditListFragment subRedditListFragment = new SubRedditListFragment();
             addFragment(R.id.reddit_list_container, subRedditListFragment);
         }
     }

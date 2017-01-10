@@ -1,8 +1,9 @@
-package com.dafelo.co.redditreader.subreddits.data.datasource;
+package com.dafelo.co.redditreader.subreddits.data.datasource.remote;
 
 
 import com.dafelo.co.redditreader.main.data.RedditClient;
 import com.dafelo.co.redditreader.main.domain.RedditObject;
+import com.dafelo.co.redditreader.subreddits.data.datasource.RedditDataStore;
 
 import rx.Observable;
 
@@ -17,7 +18,7 @@ public class CloudRedditDataStore implements RedditDataStore {
     /**
      * Construct a {@link RedditDataStore} based on connections to the api (Cloud).
      */
-    CloudRedditDataStore(RedditClient redditClient) {
+    public CloudRedditDataStore(RedditClient redditClient) {
         this.redditClient = redditClient;
     }
 

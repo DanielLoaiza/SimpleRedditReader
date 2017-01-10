@@ -15,42 +15,56 @@ import java.util.List;
 public class SubReddit implements RedditObject {
 
      String bannerImg;
-     Boolean userSrThemeEnabled;
      String submitTextHtml;
-     Boolean wikiEnabled;
-     Boolean showMedia;
      String id;
      String submitText;
      String displayName;
      String headerImg;
      String descriptionHtml;
      String title;
-     Boolean collapseDeletedComments;
-     Boolean over18;
      String publicDescriptionHtml;
-     Boolean spoilersEnabled;
-     List<Integer> iconSize = null;
      String iconImg;
      String headerTitle;
      String description;
-     Boolean publicTraffic;
-     List<Integer> headerSize = null;
      Integer subscribers;
      String submitTextLabel;
      String lang;
-     String keyColor;
      String name;
      Integer created;
      String url;
-     Boolean quarantine;
-     Boolean hideAds;
      Integer createdUtc;
-     List<Integer> bannerSize = null;
      String publicDescription;
-     Boolean showMediaPreview;
-     Integer commentScoreHideMins;
      String subredditType;
-     String submissionType;
+
+    public SubReddit() {}
+
+    public SubReddit(String bannerImg, String submitTextHtml,
+                     String submitText, String displayName, String headerImg, String descriptionHtml,
+                     String title, String publicDescriptionHtml, String iconImg, String headerTitle,
+                     String description, Integer subscribers, String submitTextLabel, String lang,
+                     String name, Integer created, String url, Integer createdUtc,
+                     String publicDescription, String subredditType) {
+        this.bannerImg = bannerImg;
+        this.submitTextHtml = submitTextHtml;
+        this.submitText = submitText;
+        this.displayName = displayName;
+        this.headerImg = headerImg;
+        this.descriptionHtml = descriptionHtml;
+        this.title = title;
+        this.publicDescriptionHtml = publicDescriptionHtml;
+        this.iconImg = iconImg;
+        this.headerTitle = headerTitle;
+        this.description = description;
+        this.subscribers = subscribers;
+        this.submitTextLabel = submitTextLabel;
+        this.lang = lang;
+        this.name = name;
+        this.created = created;
+        this.url = url;
+        this.createdUtc = createdUtc;
+        this.publicDescription = publicDescription;
+        this.subredditType = subredditType;
+    }
 
     public String getBannerImg() {
         return bannerImg;
@@ -60,38 +74,12 @@ public class SubReddit implements RedditObject {
         this.bannerImg = bannerImg;
     }
 
-    public Boolean getUserSrThemeEnabled() {
-        return userSrThemeEnabled;
-    }
-
-    public void setUserSrThemeEnabled(Boolean userSrThemeEnabled) {
-        this.userSrThemeEnabled = userSrThemeEnabled;
-    }
-
     public String getSubmitTextHtml() {
         return submitTextHtml;
     }
 
     public void setSubmitTextHtml(String submitTextHtml) {
         this.submitTextHtml = submitTextHtml;
-    }
-
-
-
-    public Boolean getWikiEnabled() {
-        return wikiEnabled;
-    }
-
-    public void setWikiEnabled(Boolean wikiEnabled) {
-        this.wikiEnabled = wikiEnabled;
-    }
-
-    public Boolean getShowMedia() {
-        return showMedia;
-    }
-
-    public void setShowMedia(Boolean showMedia) {
-        this.showMedia = showMedia;
     }
 
     public String getId() {
@@ -142,21 +130,6 @@ public class SubReddit implements RedditObject {
         this.title = title;
     }
 
-    public Boolean getCollapseDeletedComments() {
-        return collapseDeletedComments;
-    }
-
-    public void setCollapseDeletedComments(Boolean collapseDeletedComments) {
-        this.collapseDeletedComments = collapseDeletedComments;
-    }
-
-    public Boolean getOver18() {
-        return over18;
-    }
-
-    public void setOver18(Boolean over18) {
-        this.over18 = over18;
-    }
 
     public String getPublicDescriptionHtml() {
         return publicDescriptionHtml;
@@ -164,22 +137,6 @@ public class SubReddit implements RedditObject {
 
     public void setPublicDescriptionHtml(String publicDescriptionHtml) {
         this.publicDescriptionHtml = publicDescriptionHtml;
-    }
-
-    public Boolean getSpoilersEnabled() {
-        return spoilersEnabled;
-    }
-
-    public void setSpoilersEnabled(Boolean spoilersEnabled) {
-        this.spoilersEnabled = spoilersEnabled;
-    }
-
-    public List<Integer> getIconSize() {
-        return iconSize;
-    }
-
-    public void setIconSize(List<Integer> iconSize) {
-        this.iconSize = iconSize;
     }
 
 
@@ -207,23 +164,6 @@ public class SubReddit implements RedditObject {
         this.description = description;
     }
 
-
-    public Boolean getPublicTraffic() {
-        return publicTraffic;
-    }
-
-    public void setPublicTraffic(Boolean publicTraffic) {
-        this.publicTraffic = publicTraffic;
-    }
-
-    public List<Integer> getHeaderSize() {
-        return headerSize;
-    }
-
-    public void setHeaderSize(List<Integer> headerSize) {
-        this.headerSize = headerSize;
-    }
-
     public Integer getSubscribers() {
         return subscribers;
     }
@@ -246,14 +186,6 @@ public class SubReddit implements RedditObject {
 
     public void setLang(String lang) {
         this.lang = lang;
-    }
-
-    public String getKeyColor() {
-        return keyColor;
-    }
-
-    public void setKeyColor(String keyColor) {
-        this.keyColor = keyColor;
     }
 
     public String getName() {
@@ -280,21 +212,6 @@ public class SubReddit implements RedditObject {
         this.url = url;
     }
 
-    public Boolean getQuarantine() {
-        return quarantine;
-    }
-
-    public void setQuarantine(Boolean quarantine) {
-        this.quarantine = quarantine;
-    }
-
-    public Boolean getHideAds() {
-        return hideAds;
-    }
-
-    public void setHideAds(Boolean hideAds) {
-        this.hideAds = hideAds;
-    }
 
     public Integer getCreatedUtc() {
         return createdUtc;
@@ -304,15 +221,6 @@ public class SubReddit implements RedditObject {
         this.createdUtc = createdUtc;
     }
 
-    public List<Integer> getBannerSize() {
-        return bannerSize;
-    }
-
-    public void setBannerSize(List<Integer> bannerSize) {
-        this.bannerSize = bannerSize;
-    }
-
-
     public String getPublicDescription() {
         return publicDescription;
     }
@@ -321,36 +229,12 @@ public class SubReddit implements RedditObject {
         this.publicDescription = publicDescription;
     }
 
-    public Boolean getShowMediaPreview() {
-        return showMediaPreview;
-    }
-
-    public void setShowMediaPreview(Boolean showMediaPreview) {
-        this.showMediaPreview = showMediaPreview;
-    }
-
-    public Integer getCommentScoreHideMins() {
-        return commentScoreHideMins;
-    }
-
-    public void setCommentScoreHideMins(Integer commentScoreHideMins) {
-        this.commentScoreHideMins = commentScoreHideMins;
-    }
-
     public String getSubredditType() {
         return subredditType;
     }
 
     public void setSubredditType(String subredditType) {
         this.subredditType = subredditType;
-    }
-
-    public String getSubmissionType() {
-        return submissionType;
-    }
-
-    public void setSubmissionType(String submissionType) {
-        this.submissionType = submissionType;
     }
 
 }
