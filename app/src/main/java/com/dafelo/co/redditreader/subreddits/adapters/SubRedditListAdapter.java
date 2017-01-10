@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dafelo.co.redditreader.R;
 import com.dafelo.co.redditreader.subreddits.domain.SubReddit;
+import com.dafelo.co.redditreader.subreddits.listeners.OnSubRedditSelectedListener;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
     // what layout to show
     private final static int LANDSCAPE = 1;
     private final static int PORTRAIT = 0;
+    private OnSubRedditSelectedListener onItemSelectedListener;
 
     public SubRedditListAdapter(Context context) {
         mContext = context;
@@ -39,6 +42,10 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void setSubRedditsList(List<SubReddit> subReddits) {
         mSubReddits =  subReddits;
         this.notifyDataSetChanged();
+    }
+
+    public void setOnItemSelectedListener(OnSubRedditSelectedListener onItemSelectedListener) {
+        this.onItemSelectedListener = onItemSelectedListener;
     }
 
     // every time the device rotation changes calls this method
@@ -78,6 +85,8 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
                         .centerCrop()
                         .crossFade()
                         .into(((LandscapeViewHolder)holder).image);
+                ((LandscapeViewHolder) holder).image.setOnClickListener(view ->
+                        onItemSelectedListener.onSubredditItemClick(mSubReddits.get(position)));
             } else {
                 ((PortraitViewHolder)holder).title.setText(subReddit.getTitle());
                 ((PortraitViewHolder)holder).text.setText(subReddit.getPublicDescription());
@@ -88,6 +97,8 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
                         .centerCrop()
                         .crossFade()
                         .into(((PortraitViewHolder)holder).image);
+                ((PortraitViewHolder) holder).more.setOnClickListener(view ->
+                        onItemSelectedListener.onSubredditItemClick(mSubReddits.get(position)));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,6 +115,7 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
         ImageView image;
         TextView text;
         TextView subscribers;
+        Button more;
 
         PortraitViewHolder(View view) {
             super(view);
@@ -111,6 +123,7 @@ public class SubRedditListAdapter extends RecyclerView.Adapter<RecyclerView.View
             image = (ImageView) view.findViewById(R.id.tile_picture);
             text = (TextView) view.findViewById(R.id.card_text);
             subscribers = (TextView) view.findViewById(R.id.subscribers);
+            more = (Button) view.findViewById(R.id.action_button);
 
         }
     }

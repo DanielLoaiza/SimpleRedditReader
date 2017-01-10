@@ -116,6 +116,7 @@ public class LocalRedditDataStore implements RedditDataStore {
      */
     public int bulkInsert(List<SubReddit> subReddits) {
         final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+                clearTable(db);
                 db.beginTransaction();
                 int returnCount = 0;
                 try {
@@ -153,5 +154,9 @@ public class LocalRedditDataStore implements RedditDataStore {
                 }
         return returnCount;
         }
+
+    public void clearTable(SQLiteDatabase database)   {
+        database.delete(SubRedditEntry.TABLE_NAME, null,null);
+    }
 }
 

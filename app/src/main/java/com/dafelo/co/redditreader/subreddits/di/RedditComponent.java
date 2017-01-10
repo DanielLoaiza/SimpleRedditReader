@@ -5,6 +5,7 @@ import com.dafelo.co.redditreader.di.PerActivity;
 import com.dafelo.co.redditreader.di.components.ActivityComponent;
 import com.dafelo.co.redditreader.di.components.ApplicationComponent;
 import com.dafelo.co.redditreader.di.modules.ActivityModule;
+import com.dafelo.co.redditreader.subreddits.SubRedditDetailFragment;
 import com.dafelo.co.redditreader.subreddits.SubRedditListFragment;
 
 import dagger.Component;
@@ -17,4 +18,5 @@ import dagger.Component;
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, RedditModule.class})
 public interface RedditComponent extends ActivityComponent {
     void inject(SubRedditListFragment subRedditListFragment);
+    void inject(SubRedditDetailFragment subRedditDetailFragment);
 }

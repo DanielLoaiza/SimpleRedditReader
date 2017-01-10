@@ -1,5 +1,6 @@
 package com.dafelo.co.redditreader.subreddits;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -17,6 +18,7 @@ import com.dafelo.co.redditreader.subreddits.adapters.SubRedditListAdapter;
 import com.dafelo.co.redditreader.subreddits.di.RedditComponent;
 import com.dafelo.co.redditreader.subreddits.domain.SubReddit;
 import com.dafelo.co.redditreader.subreddits.interfaces.SubRedditListContract;
+import com.dafelo.co.redditreader.subreddits.listeners.OnSubRedditSelectedListener;
 import com.dafelo.co.redditreader.subreddits.presenter.SubRedditListPresenter;
 
 
@@ -35,6 +37,7 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
     RecyclerView mRecyclerView;
     SubRedditListAdapter mAdapter;
     @Inject SubRedditListContract.Presenter mPresenter;
+    private OnSubRedditSelectedListener mCallback;
 
 
     /**
@@ -52,6 +55,19 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
         this.getComponent(RedditComponent.class).inject(this);
 
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnSubRedditSelectedListener) {
+            try {
+                mCallback = (OnSubRedditSelectedListener) context;
+            } catch (ClassCastException e) {
+                throw new ClassCastException(context.toString()
+                        + " must implement OnSubredditSelectedListener");
+            }
+        }
     }
 
     @Override
@@ -109,10 +125,12 @@ public class SubRedditListFragment extends BaseFragment implements SubRedditList
     @Override
     public void populateAdapter(List<SubReddit> subReddits) {
         mAdapter.setSubRedditsList(subReddits);
+        mAdapter.setOnItemSelectedListener(mCallback);
     }
 
     @Override
     public void onDetach() {
+        mCallback = null;
         super.onDetach();
         //mPresenter = null;
     }

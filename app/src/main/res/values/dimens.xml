@@ -13,6 +13,8 @@
     <dimen name="cards_button_height">48dp</dimen>
     <dimen name="cards_footer_text_width">55dp</dimen>
     <dimen name="cards_footer_text_height">48dp</dimen>
+    <dimen name="app_bar_height">220dp</dimen>
+    <dimen name="article_keylines">72dp</dimen>
     <dimen name="card_height">304dp</dimen>
     <dimen name="card_footer">60dp</dimen>
 </resources>

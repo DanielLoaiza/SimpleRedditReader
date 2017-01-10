@@ -57,7 +57,7 @@
             android:layout_below="@+id/card_text"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="?attr/colorPrimary"
-            android:text="Show" />
+            android:text="@string/button_view_more" />
 
         <TextView
             android:id="@+id/subscribers"
